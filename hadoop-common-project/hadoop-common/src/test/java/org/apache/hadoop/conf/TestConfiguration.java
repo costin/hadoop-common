@@ -39,12 +39,14 @@ import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration.IntegerRanges;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.net.NetUtils;
-import org.codehaus.jackson.map.ObjectMapper; 
+import org.codehaus.jackson.map.ObjectMapper;
+
 
 public class TestConfiguration extends TestCase {
 
@@ -1040,6 +1042,12 @@ public class TestConfiguration extends TestCase {
     } catch (Exception e) {
       assertTrue(e instanceof IllegalArgumentException);
     }
+  }
+
+  public void testGetClassByNameOrNull() throws Exception {
+	Configuration config = new Configuration();
+	Class<?> clazz = config.getClassByNameOrNull("java.lang.Object");
+	assertNotNull(clazz);
   }
 
   public static void main(String[] argv) throws Exception {
